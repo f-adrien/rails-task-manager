@@ -1,10 +1,12 @@
 class TasksController < ApplicationController
+  before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
+
   def index
     @tasks = Task.all
   end
 
   def show
-    @task = Task.find(params[:id].to_i)
+    # @task = Task.find(params[:id].to_i)
   end
 
   def new
@@ -17,17 +19,17 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id].to_i)
+    # @task = Task.find(params[:id].to_i)
   end
 
   def update
-     @task = Task.find(params[:id].to_i)
+     # @task = Task.find(params[:id].to_i)
      @task.update(tasks_strong_parameters)
      redirect_to task_path(@task)
   end
 
   def destroy
-    @task = Task.find(params[:id].to_i)
+    # @task = Task.find(params[:id].to_i)
     @task.destroy
     redirect_to tasks_path
   end
@@ -36,6 +38,10 @@ class TasksController < ApplicationController
 
   def tasks_strong_parameters
     params.require(:task).permit(:title, :details, :completed)
+  end
+
+  def set_restaurant
+    @task = Task.find(params[:id].to_i)
   end
 
 end
